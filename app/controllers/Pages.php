@@ -1,6 +1,6 @@
 <?php
 
-class Pages
+class Pages extends Controller
 {
     public function __construct()
     {
@@ -8,11 +8,21 @@ class Pages
 
     public function home()
     {
-        echo "here's home";
+
+        $data = [
+            'title' => "Welcome to home page"
+        ];
+
+        $this->view('pages/home',$data);
     }
 
     public function about($id = [])
     {
-        echo "here's about";
+
+        $data = [
+            'title' => "Welcome to about page"
+        ];
+
+        $this->view('pages/about',$data);
     }
 }
