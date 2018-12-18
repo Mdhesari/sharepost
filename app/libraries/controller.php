@@ -9,9 +9,9 @@ class Controller
     public function model($model)
     {
         // check for model file
-        if (file_exists('../app/' . $model . '.php')) {
+        if (file_exists('../app/models/' . ucwords($model) . '.php')) {
             // Require model file
-            require_once '../app/models/' . $modle . '.php';
+            require_once '../app/models/' . ucwords($model) . '.php';
         } else {
             die('model file does not exist');
         }

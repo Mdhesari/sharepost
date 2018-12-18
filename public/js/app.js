@@ -4,4 +4,3 @@
  * Main functions and methods 
  * @author Mohammad 
  */
-alert("this's a test");
