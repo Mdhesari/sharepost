@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
-</head>
-<body>
-    <h1><?php echo isset($data['title']) ? $data['title'] : ""; ?></h1>
-</body>
-</html>
+<?php require_once APPROOT . '/views/inc/header.php'; ?>
+    FROM HOME
+<?php include_once APPROOT . '/views/inc/footer.php'; ?>
