@@ -15,7 +15,7 @@ class Controller
         } else {
             die('model file does not exist');
         }
-
+        
         // Instantiate model
         return new $model();
     }
