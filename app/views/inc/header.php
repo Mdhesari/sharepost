@@ -10,4 +10,3 @@
     <title>Sharepost</title>
 </head>
 <body>
-<?php echo SITE_NAME; ?>

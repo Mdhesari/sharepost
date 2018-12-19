@@ -10,12 +10,12 @@
  */
 class Database
 {
-
+    // Database dsn information
     private $server = DB_SERVER;
     private $user = DB_USER;
     private $pass = DB_PASSWORD;
     private $name = DB_NAME;
-
+    // Database handlers
     private $dbh;
     private $stmt;
     private $error;
