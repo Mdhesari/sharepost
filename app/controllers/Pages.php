@@ -10,9 +10,11 @@ class Pages extends Controller
 
     public function home()
     {
+        $posts = $this->postModel->getPosts();
 
         $data = [
-            'title' => "Welcome to home page"
+            'title' => "Welcome to home page",
+            'posts' => $posts
         ];
 
         $this->view('pages/home',$data);

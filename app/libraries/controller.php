@@ -17,7 +17,7 @@ class Controller
         }
         
         // Instantiate model
-        return new $model();
+        return new $model;
     }
 
     public function view($view,$data = [])

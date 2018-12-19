@@ -23,7 +23,7 @@ class Database
     public function __construct()
     {
         // Set database source name
-        $dsn = "mysql:host=$this->server;database=$this->name;charset=utf8mb4";
+        $dsn = "mysql:host=$this->server;dbname=$this->name;charset=utf8mb4";
         $options = array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -33,7 +33,7 @@ class Database
             $this->dbh = new PDO($dsn, $this->user, $this->pass);
 
         } catch (PDOException $err) {
-            echo $err->getMessage();
+            echo $this->error = $err->getMessage();
         }
 
     }
@@ -74,13 +74,13 @@ class Database
 
     // Get the result set
     public function resultSet(){
-        $this->execute();
+        $this->exec();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     // Get the single result set
     public function single(){
-        $this->execute();
+        $this->exec();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
