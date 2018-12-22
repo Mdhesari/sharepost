@@ -1,0 +1,18 @@
+// In the name of god
+$primary-color: #ddd;
+$f-size:15.4344px;
+body{
+    background:$primary-color;
+    color:#3d3d3d;
+}
+
+p{
+    font-size:$f-size;
+    color:red;
+}
+
+a{
+    text-decoration: none;
+    color:#333;
+}
+

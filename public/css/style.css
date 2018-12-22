@@ -1,7 +1,14 @@
-/* In the name of allah */
+/* In the name of god */
 body {
-    background: #ddd;
-    color: #393a3d;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size:50px;
+  background: #ddd;
+}
+
+p {
+  font-size: 15.4344px;
+  color: red;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
 }
