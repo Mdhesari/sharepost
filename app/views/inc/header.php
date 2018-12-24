@@ -12,4 +12,3 @@
     <title>Sharepost</title>
 </head>
 <body>
-<div class="container">

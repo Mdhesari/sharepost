@@ -1,14 +1,22 @@
-/* In the name of god */
-body {
-  background: #ddd;
+header {
+  color: #fff;
+  padding: 1rem 0;
 }
 
-p {
-  font-size: 15.4344px;
-  color: red;
+header .form-group {
+  display: flex;
 }
 
-a {
-  text-decoration: none;
-  color: #333;
+@media (max-width: 575px) {
+  header .form-group {
+    margin-bottom: .25rem;
+  }
+}
+
+header .btn-light {
+  height: 2.375rem;
+}
+
+.form-group {
+  padding: 0 .125rem;
 }
