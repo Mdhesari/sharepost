@@ -16,7 +16,8 @@ class Pages extends Controller
     {
 
         $data = [
-            'title' => "Travercy MVC",
+            'title' => "SHARE POST",
+            'description' => "Great web application to communicate, Available for everyone... <br> Built on the Travercy MVC PHP frame work.",
         ];
 
         $this->view('pages/home', $data);
@@ -26,7 +27,8 @@ class Pages extends Controller
     {
 
         $data = [
-            'title' => "Welcome to about page",
+            'title' => "About us",
+            'description'=>"App to share posts with your friends."
         ];
 
         $this->view('pages/about', $data);

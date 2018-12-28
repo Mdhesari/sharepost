@@ -9,5 +9,9 @@ define('DB_NAME','sharepost');
 define('APPROOT',dirname(dirname(__FILE__)));
 // URL root
 define('URLROOT',"http://localhost/sharepost");
+// Current URL
+define('CURRENTURL','http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 // Site name
 define('SITE_NAME','Sharepost');
+// App version
+define('APPVERSION','1.0.0');
