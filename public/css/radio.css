@@ -1,0 +1,78 @@
+
+label.btn span {
+    font-size: 1.5em ;
+  }
+  
+  label input[name="gender"] ~ i.fa.fa-circle-o {
+      color: #A3D941;
+        display: inline;
+  }
+  label input[name="gender"] ~ i.fa.fa-check-circle-o {
+      display: none;
+  }
+  label input[name="gender"]:checked ~ i.fa.fa-circle-o {
+      display: none;
+  }
+  label input[name="gender"]:checked ~ i.fa.fa-check-circle-o {
+      color: #61C740;
+        display: inline;
+  }
+  label:hover input[name="gender"] ~ i.fa {
+      color: #F3D941;
+  }
+  
+  label input[type="checkbox"] ~ i.fa.fa-square-o {
+      color: #A3D941;
+        display: inline;
+  }
+  label input[type="checkbox"] ~ i.fa.fa-check-square-o {
+      display: none;
+  }
+  label input[type="checkbox"]:checked ~ i.fa.fa-square-o {
+      display: none;
+  }
+  label input[type="checkbox"]:checked ~ i.fa.fa-check-square-o {
+      color: #61C740;
+        display: inline;
+  }
+  label:hover input[type="checkbox"] ~ i.fa {
+      color: #F3D941;
+  }
+  
+  div[data-toggle="buttons"] label.active {
+      color: #61C740;
+  }
+  
+  div[data-toggle="buttons"] label {
+          display: inline-block;
+          padding: 6px 12px;
+          margin-bottom: 0;
+          font-size: 12px;
+          font-weight: normal;
+          line-height: 2em;
+          text-align: left;
+          white-space: nowrap;
+          vertical-align: top;
+          cursor: pointer;
+          background-color: none;
+          border: 0px solid #A3D941;
+          border-radius: 3px;
+          color: #A3D941;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          -o-user-select: none;
+          user-select: none;
+  }
+  
+  div[data-toggle="buttons"] label:hover {
+          color: #F3D941;
+  }
+  
+  div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active {
+          -webkit-box-shadow: none;
+          box-shadow: none;
+  }
+  
+  
+  

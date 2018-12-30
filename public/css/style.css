@@ -24,3 +24,8 @@ header .btn-light {
 .form-container h3.display-4 {
   font-size: 3rem;
 }
+
+div[data-toggle="buttons"] input[type=checkbox],
+input[type=radio] {
+  display: none;
+}
