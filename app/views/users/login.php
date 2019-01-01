@@ -1,6 +1,7 @@
 <?php require_once APPROOT . '/views/inc/header.php';?>
 
     <section id="login-form" class="form-container col-md-6 mx-auto">
+    <?php flash('register_success'); ?>
         <!-- __title__ -->
         <h3 class="display-4 text-center">Login to your account</h3>
         <p class="text-muted text-center" style="font-size:17px;">Go to you panel and enjoy the moments...</p>

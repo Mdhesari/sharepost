@@ -28,7 +28,7 @@ class Users extends Controller
                 'password' => trim($_POST['password']),
                 'email-username_err' => '',
                 'password_err' => '',
-                'error' => false
+                'error' => false,
             ];
 
             // Validate email
@@ -38,7 +38,7 @@ class Users extends Controller
             }
 
             // Validate password
-            if(mb_strlen($data['password']) < $this->pass_limit){
+            if (mb_strlen($data['password']) < $this->pass_limit) {
                 $data['password_err'] = 'your password is incorrect.';
 
             }
@@ -56,11 +56,11 @@ class Users extends Controller
             }
 
             // Submit registeration if there are no errors
-            if(!$data['error']){
+            if (!$data['error']) {
                 // There are no errors
-                
-            }else {
-                $this->view('users/login',$data);
+
+            } else {
+                $this->view('users/login', $data);
 
             }
 
@@ -71,7 +71,7 @@ class Users extends Controller
                 'password' => '',
                 'email-username_err' => '',
                 'password_err' => '',
-                'error'=>false
+                'error' => false,
             ];
 
             $this->view('users/login', $data);
@@ -98,7 +98,7 @@ class Users extends Controller
                 'username_err' => '',
                 'password_err' => '',
                 'password_confirm_err' => '',
-                'error' => false
+                'error' => false,
             ];
 
             // Validate email
@@ -108,7 +108,7 @@ class Users extends Controller
             } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                 $data['email_err'] = 'email is invalid, please enter valid emai.';
 
-            } else if($this->userModel->findByEmail($data['email'])){
+            } else if ($this->userModel->findByEmail($data['email'])) {
                 $data['email_err'] = 'email is already exists.';
 
             }
@@ -116,6 +116,9 @@ class Users extends Controller
             // Validate username
             if (empty($data['username'])) {
                 $data['username_err'] = 'enter an username.';
+
+            } else if ($this->userModel->findByUsername($data['username'])) {
+                $data['username_err'] = 'username is already taken by someone else.';
 
             }
 
@@ -145,10 +148,19 @@ class Users extends Controller
 
             // Submit registeration if there are no errors
             if (!$data['error']) {
-               // There are no errors
-                
+                // There are no errors
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
-            }else {
+                // Put user's info on database
+                if ($this->userModel->register($data)) {
+                    flash('register_success','Your account was created, Now you can sign up.'); 
+                    redirect('users/login');
+
+                } else {
+                    die('Something went wrong!');
+                }
+
+            } else {
                 // There are errors
                 $this->view('users/register', $data);
             }
@@ -165,7 +177,7 @@ class Users extends Controller
                 'username_err' => '',
                 'password_err' => '',
                 'password_confirm_err' => '',
-                'error' => false
+                'error' => false,
             ];
 
             $this->view('users/register', $data);
