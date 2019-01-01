@@ -2,7 +2,8 @@
 
     <section id="login-form" class="form-container col-md-6 mx-auto">
         <!-- __title__ -->
-        <h3 class="display-4 mb-4 text-center">Login to your account</h3>
+        <h3 class="display-4 text-center">Login to your account</h3>
+        <p class="text-muted text-center" style="font-size:17px;">Go to you panel and enjoy the moments...</p>
 
         <form action="<?php echo URLROOT; ?>/users/login" method="post">
         <!-- __email__username__ -->
@@ -17,7 +18,7 @@
             </div>
             <!-- __buttons__ -->
             <input type="submit" class="btn btn-primary">
-            <a href="<?php echo URLROOT; ?>/users/register" class="btn btn-link text-secondary">Create an account?!</a>
+            <a href="<?php echo URLROOT; ?>/users/register" class="btn btn-link text-link">Create an account?!</a>
 
         </form>
     </section>

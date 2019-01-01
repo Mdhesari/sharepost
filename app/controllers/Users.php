@@ -6,9 +6,13 @@
 class Users extends Controller
 {
 
+    private $userModel;
+    protected $pass_limit;
+
     public function __construct()
     {
-
+        $this->userModel = $this->model('User');
+        $this->pass_limit = 6;
     }
 
     public function login()
@@ -24,35 +28,40 @@ class Users extends Controller
                 'password' => trim($_POST['password']),
                 'email-username_err' => '',
                 'password_err' => '',
-                'error' => false,
+                'error' => false
             ];
 
+            // Validate email
             if (empty($data['email-username'])) {
                 $data['email-username_err'] = 'enter your correct email or username.';
 
             }
 
-            if(mb_strlen($data['password']) < 8){
+            // Validate password
+            if(mb_strlen($data['password']) < $this->pass_limit){
                 $data['password_err'] = 'your password is incorrect.';
 
             }
 
+            // lookup on array in order to see if there are errors
             foreach ($data as $key => $value) {
-
                 // check if its error type
                 if (strpos($key, '_err') != false) {
                     if (strlen($value) != '') {
                         $data['error'] = true;
                     }
+
                 }
 
             }
 
-            if($data['error']){
-
-                $this->view('users/login',$data);
+            // Submit registeration if there are no errors
+            if(!$data['error']){
+                // There are no errors
+                
             }else {
-                die('success');
+                $this->view('users/login',$data);
+
             }
 
         } else {
@@ -89,7 +98,7 @@ class Users extends Controller
                 'username_err' => '',
                 'password_err' => '',
                 'password_confirm_err' => '',
-                'error' => false,
+                'error' => false
             ];
 
             // Validate email
@@ -98,6 +107,9 @@ class Users extends Controller
 
             } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                 $data['email_err'] = 'email is invalid, please enter valid emai.';
+
+            } else if($this->userModel->findByEmail($data['email'])){
+                $data['email_err'] = 'email is already exists.';
 
             }
 
@@ -108,7 +120,7 @@ class Users extends Controller
             }
 
             // Validate passwords
-            if (mb_strlen($data['password'], 'UTF-8') < 8) {
+            if (mb_strlen($data['password'], 'UTF-8') < $this->pass_limit) {
                 $data['password_err'] = 'password must be more than 8 characters.';
             } else if ($data['password'] !== $data['password_confirm']) {
                 $data['password_confirm_err'] = 'passwords don\'t match.';
@@ -119,10 +131,10 @@ class Users extends Controller
                 $data['fullname_err'] = 'full name must be more than 3 characters.';
             }
 
-
+// lookup on array in order to see if there are errors
             foreach ($data as $key => $value) {
 
-                // check if its error type
+                // Check if its error type
                 if (strpos($key, '_err') != false) {
                     if (strlen($value) != '') {
                         $data['error'] = true;
@@ -131,9 +143,13 @@ class Users extends Controller
 
             }
 
-            // Check if there are errors
-            if ($data['error']) {
+            // Submit registeration if there are no errors
+            if (!$data['error']) {
+               // There are no errors
+                
 
+            }else {
+                // There are errors
                 $this->view('users/register', $data);
             }
 
@@ -149,7 +165,7 @@ class Users extends Controller
                 'username_err' => '',
                 'password_err' => '',
                 'password_confirm_err' => '',
-                'error' => false,
+                'error' => false
             ];
 
             $this->view('users/register', $data);

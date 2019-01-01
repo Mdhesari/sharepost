@@ -1,8 +1,9 @@
 <?php require_once APPROOT . '/views/inc/header.php';?>
+
     <section id="register-form" class="form-container col-md-6 mx-auto">
        <!-- __title__ -->
         <h3 class="display-4 text-center">Create a new account</h3>
-        <p class="text-muted text-center" style="font-size:17px;">Go to you panel and enjoy the moments...</p>
+        <p class="text-muted text-center" style="font-size:17px;">Start with our website and enjoy as much as you can...</p>
 
         <form action="<?php echo URLROOT; ?>/users/register" method="post">
         <!-- __fullname__ -->
@@ -48,7 +49,7 @@
 
          <!-- __buttons__ -->
          <input type="submit" class="btn btn-success">
-         <a href="<?php echo URLROOT; ?>/users/login" class="btn btn-link text-secondary">Already have an account?!</a>
+         <a href="<?php echo URLROOT; ?>/users/login" class="btn btn-link text-link">Already have an account?!</a>
 
         </form>
 
