@@ -8,11 +8,23 @@ class Users extends Controller
 
     private $userModel;
     protected $pass_limit;
+    protected $username_limit;
 
     public function __construct()
     {
         $this->userModel = $this->model('User');
         $this->pass_limit = 6;
+        $this->username_limit = 3;
+    }
+
+    public function logout(){
+        // Destroy sessions
+        logoutUser();
+        
+    }
+
+    public function dashboard(){
+        echo 'dashboard';
     }
 
     public function login()
@@ -22,6 +34,7 @@ class Users extends Controller
 
             // Sanitize post data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $user = '';
 
             $data = [
                 'email-username' => trim($_POST['email-username']),
@@ -34,6 +47,20 @@ class Users extends Controller
             // Validate email
             if (empty($data['email-username'])) {
                 $data['email-username_err'] = 'enter your correct email or username.';
+
+            } else if (!filter_var($data['email-username'], FILTER_VALIDATE_EMAIL)) {
+                if (!$this->userModel->findByUsername($data['email-username'])) {
+                    $data['email-username_err'] = 'username is incorrect.';
+
+                } else {
+                    $user = $this->userModel->findByUsername($data['email-username'], true);
+                }
+
+            } else if (!$this->userModel->findByEmail($data['email-username'])) {
+                $data['email-username_err'] = 'email doesn\'t exists.';
+
+            } else {
+                $user = $this->userModel->findByEmail($data['email-username'], true);
 
             }
 
@@ -58,6 +85,20 @@ class Users extends Controller
             // Submit registeration if there are no errors
             if (!$data['error']) {
                 // There are no errors
+                $data['user'] = $user;
+                // Check and set logged in user
+                $loggedInUser = $this->userModel->login($data);
+
+                if ($loggedInUser) {
+                    // Create sessions
+                    createUserSession($data['user']);
+
+                } else {
+                    // Error
+                    $data['password_err'] = 'passwords don\'t match.';
+
+                    $this->view('users/login',$data);
+                }
 
             } else {
                 $this->view('users/login', $data);
@@ -117,7 +158,10 @@ class Users extends Controller
             if (empty($data['username'])) {
                 $data['username_err'] = 'enter an username.';
 
-            } else if ($this->userModel->findByUsername($data['username'])) {
+            } elseif (strlen($data['username']) < $this->username_limit) {
+                $data['username_err'] = 'username must be at least 3 characters.';
+
+            } elseif ($this->userModel->findByUsername($data['username'])) {
                 $data['username_err'] = 'username is already taken by someone else.';
 
             }
@@ -153,7 +197,7 @@ class Users extends Controller
 
                 // Put user's info on database
                 if ($this->userModel->register($data)) {
-                    flash('register_success','Your account was created, Now you can sign up.'); 
+                    flash('register_success', 'Your account was created, Now you can sign up.');
                     redirect('users/login');
 
                 } else {
