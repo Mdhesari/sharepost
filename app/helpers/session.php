@@ -30,3 +30,35 @@ function flash($name = '', $message = '', $class = 'alert alert-success')
         }
     }
 }
+
+// Store user's data in order to keep them logged in
+function createUserSession($user)
+{
+    // Set values
+    $_SESSION['user_id'] = $user->id;
+    $_SESSION['user_email'] = $user->email;
+    $_SESSION['user_gender'] = $user->gedner;
+    $_SESSION['user_fullname'] = $user->full_name;
+
+    // Redircet to home page
+    redirect();
+}
+
+// Destroy all sessions
+function logoutUser()
+{
+    session_destroy();
+
+    redirect('users/login');
+}
+
+// Check if session is still set
+function isLoggedIn()
+{
+    if (isset($_SESSION['user_id'])) {
+        return true;
+    }
+
+    return false;
+
+}

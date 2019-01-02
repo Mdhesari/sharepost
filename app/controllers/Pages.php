@@ -28,10 +28,10 @@ class Pages extends Controller
 
         $data = [
             'title' => "About us",
-            'description'=>"App to share posts with your friends."
+            'description' => "App to share posts with your friends.",
         ];
 
         $this->view('pages/about', $data);
     }
-    
+
 }

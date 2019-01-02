@@ -14,6 +14,17 @@ class User
         $this->db = new Database;
     }
 
+    public function login($data)
+    {
+        // Check if passwords match
+        if (password_verify($data['password'], $data['user']->password)) {
+            return true;
+        }
+
+        return false;
+
+    }
+
     public function register($data)
     {
         $this->db->query('INSERT
@@ -34,13 +45,17 @@ class User
         return false;
     }
 
-    public function findByUsername($username)
+    public function findByUsername($username, $get = false)
     {
         $this->db->query('SELECT *
         FROM users
         WHERE username=:username');
         $this->db->bind(':username', $username);
         $row = $this->db->single();
+
+        if ($get) {
+            return $row;
+        }
 
         if ($this->db->rowCount() > 0) {
             return true;
@@ -49,13 +64,17 @@ class User
         }
     }
 
-    public function findByEmail($email)
+    public function findByEmail($email, $get = false)
     {
         $this->db->query('SELECT *
                           FROM users
                           WHERE email=:email');
         $this->db->bind(':email', $email);
         $row = $this->db->single();
+
+        if ($get) {
+            return $row;
+        }
 
         if ($this->db->rowCount() > 0) {
             return true;
