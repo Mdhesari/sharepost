@@ -29,3 +29,8 @@ div[data-toggle="buttons"] input[type=checkbox],
 input[type=radio] {
   display: none;
 }
+
+#post-show>p {
+  font-size: 14px;
+  padding-left:1rem;
+}

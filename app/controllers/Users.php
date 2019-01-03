@@ -19,7 +19,7 @@ class Users extends Controller
 
     public function home(){
         redirect('users/login');
-        
+
     }
 
     public function logout(){
@@ -30,10 +30,14 @@ class Users extends Controller
 
     public function dashboard(){
         echo 'dashboard';
+
     }
 
     public function login()
     {
+        if(isLoggedIn()){
+            redirect('posts');
+        }
         // Check for post request
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -126,10 +130,14 @@ class Users extends Controller
 
     public function register()
     {
+        if(isLoggedIn()){
+            redirect('posts');
+        }
         // Check for post request
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Sanitize post data
+            // * This filter removes data that is potentially harmful for your application. It is used to strip tags and remove or encode unwanted characters.
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
@@ -183,17 +191,17 @@ class Users extends Controller
                 $data['fullname_err'] = 'full name must be more than 3 characters.';
             }
 
-        // lookup on array in order to see if there are errors
-            foreach ($data as $key => $value) {
+            // lookup on array in order to see if there are errors
+                foreach ($data as $key => $value) {
 
-                // Check if its error type
-                if (strpos($key, '_err') != false) {
-                    if (strlen($value) != '') {
-                        $data['error'] = true;
+                    // Check if its error type
+                    if (strpos($key, '_err') != false) {
+                        if (strlen($value) != '') {
+                            $data['error'] = true;
+                        }
                     }
-                }
 
-            }
+                }
 
             // Submit registeration if there are no errors
             if (!$data['error']) {

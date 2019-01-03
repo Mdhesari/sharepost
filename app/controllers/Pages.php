@@ -15,6 +15,10 @@ class Pages extends Controller
     public function home()
     {
 
+        if(isLoggedIn()){
+            redirect('posts');
+        }
+
         $data = [
             'title' => "SHARE POST",
             'description' => "Great web application to communicate, Available for everyone... <br> Built on the Travercy MVC PHP frame work.",
