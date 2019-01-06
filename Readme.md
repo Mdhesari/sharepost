@@ -1,3 +1,6 @@
-### Social Network Community for everyone
+# Sharepost
 
-Coming soon...
+### Distributed, Open source social network software
+
+
+
