@@ -34,3 +34,7 @@ input[type=radio] {
   font-size: 14px;
   padding-left:1rem;
 }
+
+.no-gutter{
+  margin:0;
+}

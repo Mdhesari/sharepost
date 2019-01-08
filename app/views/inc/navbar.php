@@ -21,7 +21,9 @@
         <a class="nav-link text-light" href="<?php echo URLROOT; ?>/users/dashboard">Dashboard</a>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link text-danger" href="<?php echo URLROOT; ?>/users/logout">Logout</a>
+        <a class="nav-link text-danger" href="#" id="logout-btn" onclick="if(confirm('Are you sure?! \nYou want to logout!')){
+        window.location = '<?php echo URLROOT; ?>/users/logout';
+    }">Logout</a>
       </li>
     <?php else: ?>
       <li class="nav-item">

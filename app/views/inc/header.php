@@ -14,5 +14,14 @@
     <title>Sharepost</title>
 </head>
 <body>
+<noscript class="no-gutter">
+<!-- <META HTTP-EQUIV="Refresh" CONTENT="0;URL=https://google.com"> -->
+    <div class="alert alert-danger no-gutter" role="alert">
+        Please enable javascript!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</noscript>
 <?php require APPROOT . '/views/inc/navbar.php'; ?>
 <div class="container">
