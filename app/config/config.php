@@ -14,4 +14,4 @@ define('CURRENTURL','http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'
 // Site name
 define('SITE_NAME','Sharepost');
 // App version
-define('APPVERSION','1.0.0');
+define('APPVERSION','1.2.0');

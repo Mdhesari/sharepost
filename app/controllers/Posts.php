@@ -64,12 +64,12 @@ class Posts extends Controller
 
             if (!$data['error']) {
                 if ($this->postModel->edit($data)) {
-                    flash('editpost-success','Post was edited successfully.');
+                    flash('editpost-success', 'Post was edited successfully.');
                     redirect('posts');
                 } else {
                     // error
                     flash('editpost-fail', 'Post was not deleted, there were something wrong. Please try again later!');
-                    redirect('posts/edit/'.$id);
+                    redirect('posts/edit/' . $id);
                 }
 
             } else {
@@ -129,7 +129,7 @@ class Posts extends Controller
             redirect('posts');
         }
 
-        $user = $this->userModel->findById($post->user_id);
+        $user = $this->userModel->findById($post->user_id, true);
 
         $data = [
             'post' => $post,

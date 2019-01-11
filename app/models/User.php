@@ -14,13 +14,48 @@ class User
         $this->db = new Database;
     }
 
-    public function findById($id)
+   /**
+    * When we don't know by which way we'll find user
+    *
+    * @param [type] $str
+    * @param boolean $get
+    * @return object
+    * @return boolean
+    */
+    public function find($str, $get = false)
+    {
+
+        if (filter_var($str, FILTER_VALIDATE_EMAIL)) {
+            return $this->findByEmail($str, $get);
+
+        } elseif (is_numeric($str)) {
+            return $this->findById($str, $get);
+
+        }
+
+        return $this->findByUsername($str, $get);
+
+    }
+
+    public function findById($id, $get = false)
     {
         $this->db->query('SELECT *
                           FROM users
                           WHERE id=:id');
         $this->db->bind(':id', $id);
-        return $this->db->single();
+
+        $row = $this->db->single();
+
+        if ($get) {
+            return $row;
+        }
+
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     public function login($data)

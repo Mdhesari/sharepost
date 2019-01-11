@@ -23,7 +23,7 @@ class Post
                           WHERE id=:id');
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':text', $data['text']);
-        $this->db->bind(':id',$data['post_id']);
+        $this->db->bind(':id', $data['post_id']);
         return $this->db->exec();
     }
 
@@ -55,6 +55,21 @@ class Post
         } catch (PDOException $err) {
             // handle errors
         }
+    }
+
+    public function fetchByUserId($user_id)
+    {
+        $this->db->query('SELECT *
+                          FROM posts
+                          WHERE user_id=:user_id');
+        $this->db->bind(':user_id', $user_id);
+        return $this->db->resultSet(); 
+    }
+
+    public function countUserPosts($user_id){
+        $this->fetchByUserId($user_id);
+        return $this->db->rowCount();
+
     }
 
     public function fetchAll()

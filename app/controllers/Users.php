@@ -7,35 +7,51 @@ class Users extends Controller
 {
 
     private $userModel;
+    private $postModel;
     protected $pass_limit;
     protected $username_limit;
 
     public function __construct()
     {
         $this->userModel = $this->model('User');
+        $this->postModel = $this->model('Post');
         $this->pass_limit = 6;
         $this->username_limit = 3;
     }
 
-    public function home(){
+    public function home()
+    {
         redirect('users/login');
 
     }
 
-    public function logout(){
+    public function logout()
+    {
         // Destroy sessions
         logoutUser();
-        
-    }   
 
-    public function dashboard(){
-        echo 'dashboard';
+    }
+
+    public function dashboard()
+    {
+
+        $posts = $this->postModel->fetchByUserId($_SESSION['user_id']);
+        $user = $this->userModel->find($_SESSION['user_id'], true);
+
+        $data = [
+            'posts' => $posts,
+            'user' => $user,
+            'user_posts_count' => $this->postModel->countUserPosts($_SESSION['user_id']),
+            'location' => getLocation(),
+        ];
+
+        $this->view('users/dashboard', $data);
 
     }
 
     public function login()
     {
-        if(isLoggedIn()){
+        if (isLoggedIn()) {
             redirect('posts');
         }
         // Check for post request
@@ -106,7 +122,7 @@ class Users extends Controller
                     // Error
                     $data['password_err'] = 'passwords don\'t match.';
 
-                    $this->view('users/login',$data);
+                    $this->view('users/login', $data);
                 }
 
             } else {
@@ -130,7 +146,7 @@ class Users extends Controller
 
     public function register()
     {
-        if(isLoggedIn()){
+        if (isLoggedIn()) {
             redirect('posts');
         }
         // Check for post request
@@ -192,16 +208,16 @@ class Users extends Controller
             }
 
             // lookup on array in order to see if there are errors
-                foreach ($data as $key => $value) {
+            foreach ($data as $key => $value) {
 
-                    // Check if its error type
-                    if (strpos($key, '_err') != false) {
-                        if (strlen($value) != '') {
-                            $data['error'] = true;
-                        }
+                // Check if its error type
+                if (strpos($key, '_err') != false) {
+                    if (strlen($value) != '') {
+                        $data['error'] = true;
                     }
-
                 }
+
+            }
 
             // Submit registeration if there are no errors
             if (!$data['error']) {
