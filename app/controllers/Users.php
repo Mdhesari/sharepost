@@ -42,8 +42,8 @@ class Users extends Controller
             'posts' => $posts,
             'user' => $user,
             'user_posts_count' => $this->postModel->countUserPosts($_SESSION['user_id']),
-            'location' => getLocation(),
         ];
+        // 'location' => getLocation(), 
 
         $this->view('users/dashboard', $data);
 

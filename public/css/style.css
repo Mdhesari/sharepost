@@ -32,24 +32,33 @@ input[type=radio] {
 
 #post-show>p {
   font-size: 14px;
-  padding-left:1rem;
+  padding-left: 1rem;
 }
 
-.no-gutter{
-  margin:0;
+.no-gutter {
+  margin: 0;
 }
 
 /* __profile__container */
-#profile_container .card img{
-  width:50%;
-  border-radius:50%;
+#profile_container .card img {
+  width: 50%;
+  border-radius: 50%;
 }
 
-#profile_container .card .card-subtitle{
-  font-weight:400;
+#dashboard_post .card .card-subtitle {
+  font-weight: 400;
 }
 
 /* __post__container */
-#posts_container h3 a{
-  font-size:34px;
+#posts_container h3 a {
+  font-size: 34px;
+}
+
+#post article p.card-text {
+  white-space:nowrap;
+  word-wrap:break-word;
+  max-width: 70vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
 }

@@ -22,7 +22,9 @@
       </li> -->
       <li class="nav-item">
         
-      <a href="<?php echo URLROOT; ?>/users/dashboard" class="nav-link text-light">Dashboard</a>
+      <a href="<?php echo URLROOT; ?>/users/dashboard" class="nav-link text-light">
+       <i class="fa fa-briefcase"></i> Dashboard
+    </a>
       </li>
     <?php else: ?>
       <li class="nav-item">
