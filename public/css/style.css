@@ -54,11 +54,20 @@ input[type=radio] {
   font-size: 34px;
 }
 
-#post article p.card-text {
+/* .card img{
+  width:13pc !important;
+  height:13pc !important;
+} */
+
+#posts article p.card-text {
   white-space:nowrap;
   word-wrap:break-word;
   max-width: 70vw;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-all;
+}
+
+#posts article p.author{
+  font-size:13px;
 }

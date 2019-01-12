@@ -10,8 +10,8 @@
     <form action="<?php echo URLROOT; ?>/posts/add" method="post" enctype="multipart/form-data">
         <!-- __image__file__ -->
         <div class="form-group">
-            <input class="form-control-file" name="image" type="file" accept="image/x-png,image/gif,image/jpeg">
-            <p class="inalid-feedback"></p>
+            <input class="form-control-file <?php echo !empty($data['image_err']) ? 'is-invalid' : ''; ?>" name="image" type="file" accept="image/x-png,image/gif,image/jpeg">
+            <p class="invalid-feedback"><?php echo $data['image_err'] ?></p>
         </div>
         <!-- __description__ -->
         <div class="form-group">

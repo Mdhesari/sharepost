@@ -22,11 +22,13 @@ function imageAddPost($file, $user_id)
     $target_file = $target_dir . '.' . $imageFileType;
 
     // Check if image is actual img
-    $check = getimagesize($file['tmp_name']);
+    // ****************************** Temporarry **************************************
+   /*  $check = getimagesize($file['tmp_name']);
     if ($check === false) {
         $result['error'] = 'file is not an image.';
         return $result;
-    }
+    } */
+    // ********************************************************************************
 
     // Check if file exists
     if (file_exists($target_file)) {

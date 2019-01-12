@@ -33,10 +33,22 @@ class Posts extends Controller
                 'description' => $_POST['description'],
                 'text' => $_POST['text'],
                 'post_id' => $id,
+                'image' => $_FILES['image'],
+                'image_err' => '',
                 'description_err' => '',
                 'text_err' => '',
                 'error' => '',
             ];
+
+            if (!empty($data['image']['name'])) {
+                $result = imageAddPost($data['image'], $_SESSION['user_id']);
+
+                if (!empty($result['error'])) {
+                    $data['image_err'] = $result['error'];
+                } else {
+                    $data['image'] = $result['img_src'];
+                }
+            }
 
             // Validate description
             if (empty($data['description'])) {
@@ -68,7 +80,7 @@ class Posts extends Controller
                     redirect('posts');
                 } else {
                     // error
-                    flash('editpost-fail', 'Post was not deleted, there were something wrong. Please try again later!');
+                    flash('editpost-fail', 'Post was not Edited, there were something wrong. Please try again later!');
                     redirect('posts/edit/' . $id);
                 }
 
@@ -89,6 +101,8 @@ class Posts extends Controller
                 'description' => $post->description,
                 'text' => $post->text,
                 'post_id' => $post->id,
+                'image' => !empty($post->image) ? URLROOT . '/assets/pictures/posts/' . $_SESSION['user_id'] . '/' . $post->image:'',
+                'image_err' => '',
                 'description_err' => '',
                 'text_err' => '',
                 'error' => '',
@@ -170,7 +184,7 @@ class Posts extends Controller
                 } else {
                     $data['image'] = $result['img_src'];
                 }
-                
+
             }
 
             // Validate description
@@ -218,6 +232,9 @@ class Posts extends Controller
             $data = [
                 'description' => '',
                 'text' => '',
+                'user_id' => $_SESSION['user_id'],
+                'image' => '',
+                'image_err' => '',
                 'description_err' => '',
                 'text_err' => '',
                 'error' => false,

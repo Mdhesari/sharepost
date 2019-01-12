@@ -18,12 +18,19 @@ class Post
 
     public function edit($data)
     {
+        // if (empty($data['image'])) {
+        //     $this->db->query('UPDATE posts
+        //                   SET description=:description, text=:text
+        //                   WHERE id=:id');
+        // } else {}
         $this->db->query('UPDATE posts
-                          SET description=:description, text=:text
+                          SET image=:image, description=:description, text=:text
                           WHERE id=:id');
+        $this->db->bind(':image', $data['image']);
         $this->db->bind(':description', $data['description']);
         $this->db->bind(':text', $data['text']);
         $this->db->bind(':id', $data['post_id']);
+        
         return $this->db->exec();
     }
 
@@ -46,11 +53,12 @@ class Post
     public function add($data)
     {
         try {
-            $this->db->query('INSERT INTO posts (user_id,description,text)
-                         VALUES (:user_id,:description,:text)');
+            $this->db->query('INSERT INTO posts (user_id,description,text,image)
+                         VALUES (:user_id,:description,:text,:image)');
             $this->db->bind(':user_id', $data['user_id']);
             $this->db->bind(':description', $data['description']);
             $this->db->bind(':text', $data['text']);
+            $this->db->bind(':image', $data['image']);
             return $this->db->exec();
         } catch (PDOException $err) {
             // handle errors
@@ -63,10 +71,11 @@ class Post
                           FROM posts
                           WHERE user_id=:user_id');
         $this->db->bind(':user_id', $user_id);
-        return $this->db->resultSet(); 
+        return $this->db->resultSet();
     }
 
-    public function countUserPosts($user_id){
+    public function countUserPosts($user_id)
+    {
         $this->fetchByUserId($user_id);
         return $this->db->rowCount();
 

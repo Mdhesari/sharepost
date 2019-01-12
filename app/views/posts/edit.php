@@ -2,13 +2,22 @@
 
 <section id="edit-post">
     <?php
-    flash('editpost-fail');
-    flash('addpost-fail');
-    ?>
+flash('editpost-fail');
+flash('addpost-fail');
+?>
+
     <!-- __title__ -->
     <h3 class="display-4 text-center text-warning">Edit Post</h3>
     <p class="text-muted text-center" style="font-size:17px;">What's in your mind?!</p>
-    <form action="<?php echo URLROOT; ?>/posts/edit/<?php echo $data['post_id']; ?>" method="post">
+    <form action="<?php echo URLROOT; ?>/posts/edit/<?php echo $data['post_id']; ?>" method="post" enctype="multipart/form-data">
+        <!-- __image__file__ -->
+        <div class="form-group">
+            <input class="form-control-file <?php echo !empty($data['image_err']) ? 'is-invalid' : ''; ?>" name="image"
+                type="file" accept="image/x-png,image/gif,image/jpeg" value="<?php echo $data['image']; ?>">
+            <p class="invalid-feedback">
+                <?php echo $data['image_err'] ?>
+            </p>
+        </div>
         <!-- __description__ -->
         <div class="form-group">
             <input class="form-control <?php echo !empty($data['description_err']) ? 'is-invalid' : ''; ?>" name="description"
