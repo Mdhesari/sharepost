@@ -5,6 +5,7 @@ require_once 'config/config.php';
 require_once 'helpers/url.php';
 require_once 'helpers/session.php';
 require_once 'helpers/location.php';
+require_once 'helpers/upload.php';
 
 // Load libraries
 require_once 'libraries/Controller.php';

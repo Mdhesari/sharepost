@@ -153,10 +153,25 @@ class Posts extends Controller
                 'description' => ucwords($_POST['description']),
                 'text' => ucfirst($_POST['text']),
                 'user_id' => $_SESSION['user_id'],
+                'image' => $_FILES['image'],
+                'image_err' => '',
                 'description_err' => '',
                 'text_err' => '',
                 'error' => false,
             ];
+
+            if (!empty($data['image']['name'])) {
+                $result = imageAddPost($data['image'], $_SESSION['user_id']);
+
+                // Check error
+                if (!empty($result['error'])) {
+                    $data['image_err'] = $result['error'];
+
+                } else {
+                    $data['image'] = $result['img_src'];
+                }
+                
+            }
 
             // Validate description
             if (empty($data['description'])) {
