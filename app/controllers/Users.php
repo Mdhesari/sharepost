@@ -17,24 +17,30 @@ class Users extends Controller
         $this->postModel = $this->model('Post');
         $this->pass_limit = 6;
         $this->username_limit = 3;
+
     }
 
     public function home()
     {
         redirect('users/login');
-
     }
 
     public function logout()
     {
-        // Destroy sessions
-        logoutUser();
+        if (isLoggedIn()) {
+            logoutUser();
+        } else {
+            redirect('users');
+        }
 
     }
 
     public function dashboard()
     {
 
+        if (!isLoggedIn()) {
+            redirect('users');
+        }
         $posts = $this->postModel->fetchByUserId($_SESSION['user_id']);
         $user = $this->userModel->find($_SESSION['user_id'], true);
 
@@ -43,7 +49,7 @@ class Users extends Controller
             'user' => $user,
             'user_posts_count' => $this->postModel->countUserPosts($_SESSION['user_id']),
         ];
-        // 'location' => getLocation(), 
+        // 'location' => getLocation(),
 
         $this->view('users/dashboard', $data);
 

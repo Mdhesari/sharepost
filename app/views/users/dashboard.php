@@ -57,12 +57,12 @@
 
     <div id="posts_container" class="col-lg-8 col-md-9 col-12">
         <h3 class="display-4">My Posts
-            <a href="<?php echo URLROOT;?>/posts/add" class="text-link text-success ml-2" title="Add New Post">
+            <a href="<?php echo URLROOT; ?>/posts/add" class="text-link text-success ml-2" title="Add New Post">
                 <i class="fa fa-plus-square"></i>
             </a>
         </h3>
         <!-- posts area -->
-        <section class="mt-5" id="post">
+        <section class="mt-5" id="posts">
             <?php
 flash('addpost-success');
 flash('delete-success');
@@ -76,19 +76,30 @@ flash('editpost-success');
                 <p class="mb-0">Whenever you had problem just read the guide page.</p>
             </div>
             <?php else: ?>
+            <div class="card-columns">
             <?php foreach ($data['posts'] as $post): ?>
-            <article class="card card-body mb-4">
-                <h4 class="mb-2 card-title text-capitalize">
-                    <?php echo $post->description; ?>
-                </h4>
-                <span class="text-info">On
-                    <?php echo $post->date; ?></span>
-                <p class="card-text mt-3">
-                    <?php echo $post->text; ?>
-                </p>
-                <a href="<?php echo URLROOT; ?>/posts/show/<?php echo $post->id; ?>" class="btn btn-link">Read More</a>
-            </article>
-            <?php endforeach;?>
+                <article class="card">
+                    <?php if (strlen($post->image) > 8): ?>
+                    <img src="<?php echo URLROOT; ?>/assets/pictures/posts/<?php echo $post->user_id . '/' . $post->image ?>"
+                        class="card-img-top" alt="...">
+                    <?php endif;?>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <?php echo $post->description; ?>
+                        </h5>
+                        <p class="card-text">
+                            <?php echo $post->text; ?>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="<?php echo URLROOT; ?>/posts/show/<?php echo $post->id; ?>" class="btn btn-link">Read
+                            More</a>
+                        <small class="text-muted">
+                            <?php echo time_elapsed_string($post->date) ?></small>
+                    </div>
+                </article>
+                <?php endforeach;?>
+            </div>
             <?php endif;?>
         </section>
     </div>
