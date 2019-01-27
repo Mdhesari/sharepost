@@ -52,31 +52,54 @@ flash('comment_failed');
     </form>
 
     <?php endif;?>
-    
+
 </section>
 
 <section id="comments" class="bg-light p-4 mt-5">
     <!-- __title__ -->
     <div class="row">
         <h3 data-toggle="collapse" data-target="#view_comments"><i class="fa fa-comments"></i> Comments <span
-                class="text-mini">[Click here]</span></h3>
+                class="text-mini">[<?php echo $data['comments_num']; ?>]</span></h3>
 
     </div>
 
     <!-- __comments__ -->
     <div class="collapse" id="view_comments">
 
+        <!-- __show__comments__ -->
+        <?php foreach ($data['comments'] as $comment): ?>
+        <div class="media my-4">
+            <!-- __user__image__ -->
+            <img class="mr-3 img-thumbnail" src="<?php echo URLROOT; ?>/assets/pictures/profile/default.jpg" alt="<?php echo $comment->full_name; ?> Profile Picture">
+
+            <!-- __user__feedback__ -->
+            <div class="media-body">
+                <h5 class="mt-0"><?php echo $comment->full_name; ?></h3>
+                <?php echo $comment->text; ?>
+
+            </div>
+
+            <!-- __delete & edit buttons__ -->
+
+        <!-- <?php print_r($comment);?> -->
+        </div>
+        <?php endforeach;?>
+
+        <!-- __add__comment__ -->
         <form class="mt-5" action="<?php echo URLROOT; ?>/comments/add/<?php echo $data['post']->id; ?>" method="post">
             <!-- __textarea__ -->
             <div class="form-group">
-                <textarea name="comment_text" required id="comment_text" rows="5" placeholder="Feedback..."></textarea>
+                <textarea name="comment_text" required id="comment_text" rows="5"
+                    placeholder="Feedback..."></textarea>
             </div>
 
             <!-- __submit__ -->
             <input type="submit" class="btn btn-primary">
 
         </form>
+
     </div>
+
 </section>
 
 

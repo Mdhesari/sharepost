@@ -7,9 +7,26 @@
 
 class Posts extends Controller
 {
-
+    /**
+     * Post model
+     *
+     * @var object
+     */
     private $postModel;
+
+    /**
+     * User model
+     *
+     * @var object
+     */
     private $userModel;
+
+    /**
+     * Comment model
+     *
+     * @var object
+     */
+    private $commentModel;
 
     public function __construct()
     {
@@ -19,6 +36,8 @@ class Posts extends Controller
 
         $this->postModel = $this->model('Post');
         $this->userModel = $this->model('User');
+        $this->commentModel = $this->model('Comment');
+
     }
 
     public function edit($id)
@@ -101,7 +120,7 @@ class Posts extends Controller
                 'description' => $post->description,
                 'text' => $post->text,
                 'post_id' => $post->id,
-                'image' => !empty($post->image) ? URLROOT . '/assets/pictures/posts/' . $_SESSION['user_id'] . '/' . $post->image:'',
+                'image' => !empty($post->image) ? URLROOT . '/assets/pictures/posts/' . $_SESSION['user_id'] . '/' . $post->image : '',
                 'image_err' => '',
                 'description_err' => '',
                 'text_err' => '',
@@ -145,9 +164,14 @@ class Posts extends Controller
 
         $user = $this->userModel->findById($post->user_id, true);
 
+        $comments = $this->commentModel->fetch($id);
+        $comments_num = $this->commentModel->fetch($id,false);
+
         $data = [
             'post' => $post,
             'user' => $user,
+            'comments' => $comments,
+            'comments_num' => $comments_num,
         ];
 
         $this->view('posts/show', $data);

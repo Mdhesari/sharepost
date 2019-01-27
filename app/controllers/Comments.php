@@ -77,6 +77,7 @@ class Comments extends Controller
             // If there are no errors submit the comment
             if ($data['text_err'] == '') {
                 unset($data['text_err']);
+                
                 if ($this->commentModel->add($data)) {
                     // Comment successfully added
                     flash('comment_added', 'Your comment was added.');
@@ -85,7 +86,7 @@ class Comments extends Controller
 
                 } else {
                     // Comment was not added {database error}
-                    flash('comment_failed', 'Unable to add comment now, please try again later.', 'alert alert-danger');
+                    flash('comment_failed', 'Unable to add comments now, please try again later.', 'alert alert-danger');
 
                     redirect('posts/show/' . $data['post_id']);
                 }
