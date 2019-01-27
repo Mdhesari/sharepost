@@ -1,9 +1,5 @@
 <?php
-/**
- * User Model : Related to database stuff
- * @return data from database
- * Modify database content
- */
+
 class Post
 {
 
