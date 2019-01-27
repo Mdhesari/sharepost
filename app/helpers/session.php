@@ -37,7 +37,7 @@ function createUserSession($user)
     // Set values
     $_SESSION['user_id'] = $user->id;
     $_SESSION['user_email'] = $user->email;
-    $_SESSION['user_gender'] = $user->gendger;
+    $_SESSION['user_gender'] = $user->gender;
     $_SESSION['user_fullname'] = $user->full_name;
 
     // Redircet to home page

@@ -17,6 +17,11 @@ header .btn-light {
   height: 2.375rem;
 }
 
+.text-mini {
+  font-size: 10px;
+
+}
+
 .form-group {
   padding: 0 .125rem;
 }
@@ -60,14 +65,23 @@ input[type=radio] {
 } */
 
 #posts article p.card-text {
-  white-space:nowrap;
-  word-wrap:break-word;
+  white-space: nowrap;
+  word-wrap: break-word;
   max-width: 70vw;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-all;
 }
 
-#posts article p.author{
-  font-size:13px;
+#posts article p.author {
+  font-size: 13px;
+}
+
+/* Comments ################################################################## */
+#comments h3 {
+  cursor: pointer !important;
+}
+
+textarea#comment_text {
+  width: 100% !important;
 }
