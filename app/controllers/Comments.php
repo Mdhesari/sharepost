@@ -46,6 +46,17 @@ class Comments extends Controller
     }
 
     /**
+     * Redirect to post
+     *
+     * @return void
+     */
+    public function home()
+    {
+        redirect('posts');
+
+    }
+
+    /**
      * Add new comment
      *
      * @param int $id
@@ -77,7 +88,7 @@ class Comments extends Controller
             // If there are no errors submit the comment
             if ($data['text_err'] == '') {
                 unset($data['text_err']);
-                
+
                 if ($this->commentModel->add($data)) {
                     // Comment successfully added
                     flash('comment_added', 'Your comment was added.');
@@ -107,9 +118,43 @@ class Comments extends Controller
 
     }
 
-    public function delete()
+    public function delete($id)
     {
 
+        // Only access post requests
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Get function arguments in an array
+            $arr_id = func_get_args();
+
+            // Check if page number is undefined
+            // * Validate $id number
+            if (count($arr_id) < 1 || !preg_match('~[0-9]+~', $arr_id[0])) {
+                redirect('posts');
+
+            }
+
+            if ($this->commentModel->delete($arr_id)) {
+                flash('comment_deleted', 'You comment was deleted successfully.');
+
+                redirect('posts/show/' . $arr_id[0]);
+            } else {
+                flash('comment_not_deleted', 'Unable to delete comment now, please try again later.', 'alert alert-danger');
+
+                redirect('posts/show/' . $arr_id[0]);
+            }
+
+        } else {
+
+            // Check if page number is undefined
+            // * Validate $id number
+            if (is_null($id) || !preg_match('~[0-9]+~', $id)) {
+                redirect('posts/show/' . $id);
+
+            } else {
+                redirect('posts');
+            }
+
+        }
     }
 
 }

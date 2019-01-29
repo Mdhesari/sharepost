@@ -9,9 +9,20 @@ class Comment
         $this->db = new Database;
     }
 
+    public function delete($ids)
+    {
+        $this->db->query('DELETE FROM comments
+                          WHERE post_id=:post_id
+                          AND id=:id');
+        $this->db->bind(':post_id', $ids[0]);
+        $this->db->bind(':id',$ids[1]);
+        return $this->db->exec();
+
+    }
+
     public function add($data)
     {
-        $this->db->query('INSERT 
+        $this->db->query('INSERT
                          INTO comments (user_id,post_id,text)
                          VALUES (:user_id,:post_id,:text)
                           ');

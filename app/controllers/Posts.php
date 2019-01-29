@@ -133,7 +133,15 @@ class Posts extends Controller
 
     public function delete($id)
     {
+        // Only access post requests
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            // Check if page number is undefined
+            if (is_null($id)) {
+                redirect('posts');
+
+            }
+
             $result = $this->postModel->delete($id);
 
             if ($result) {
@@ -165,7 +173,7 @@ class Posts extends Controller
         $user = $this->userModel->findById($post->user_id, true);
 
         $comments = $this->commentModel->fetch($id);
-        $comments_num = $this->commentModel->fetch($id,false);
+        $comments_num = $this->commentModel->fetch($id, false);
 
         $data = [
             'post' => $post,

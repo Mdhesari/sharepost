@@ -8,6 +8,9 @@
     <?php
 flash('comment_added');
 flash('comment_failed');
+flash('comment_deleted');
+flash('comment_not_deleted');
+
 ?>
 </div>
 
@@ -70,18 +73,27 @@ flash('comment_failed');
         <?php foreach ($data['comments'] as $comment): ?>
         <div class="media my-4">
             <!-- __user__image__ -->
-            <img class="mr-3 img-thumbnail" src="<?php echo URLROOT; ?>/assets/pictures/profile/default.jpg" alt="<?php echo $comment->full_name; ?> Profile Picture">
+            <img class="mr-3 img-thumbnail" src="<?php echo URLROOT; ?>/assets/pictures/profile/default.jpg"
+                alt="<?php echo $comment->full_name; ?> Profile Picture">
 
             <!-- __user__feedback__ -->
             <div class="media-body">
                 <h5 class="mt-0"><?php echo $comment->full_name; ?></h3>
-                <?php echo $comment->text; ?>
+                    <?php echo $comment->text; ?>
 
             </div>
 
-            <!-- __delete & edit buttons__ -->
+            <?php if ($comment->userId == $_SESSION['user_id']): ?>
+            <!-- __delete__buttons__ -->
+            <div class="media-footer">
+                <form action="<?php echo URLROOT; ?>/comments/delete/<?php echo $data['post']->id . '/' . $comment->id; ?>" method="post">
+            <input type="submit" class="btn btn-link text-danger" value="Delete">
+            
+            </form>
+            </div>
+            <?php endif;?>
 
-        <!-- <?php print_r($comment);?> -->
+            <!-- <?php print_r($comment);?> -->
         </div>
         <?php endforeach;?>
 
@@ -89,8 +101,7 @@ flash('comment_failed');
         <form class="mt-5" action="<?php echo URLROOT; ?>/comments/add/<?php echo $data['post']->id; ?>" method="post">
             <!-- __textarea__ -->
             <div class="form-group">
-                <textarea name="comment_text" required id="comment_text" rows="5"
-                    placeholder="Feedback..."></textarea>
+                <textarea name="comment_text" required id="comment_text" rows="5" placeholder="Feedback..."></textarea>
             </div>
 
             <!-- __submit__ -->
