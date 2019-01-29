@@ -87,7 +87,35 @@ textarea#comment_text {
 }
 
 #view_comments .media img {
-  max-width:100%;
-  width:4vw;
+  max-width: 100%;
+  width: 4vw;
   border-radius: 50%;
+}
+
+/* Post_show ################################################################## */
+#post-show #like-btn {
+  color: #5f5d5c;
+  font-size: 27px;
+  text-decoration: none;
+}
+
+#post-show #like-btn span {
+  color: #5f5d5c;
+}
+
+#post-show #like-btn i{
+  transition:color 200ms;
+}
+
+#post-show #like-btn i:hover {
+  transition:color 500ms;
+  color: #4dabf7;
+}
+
+#post-show #like-btn.liked {
+  color: #4dabf7;
+}
+
+#post-show #like-btn.liked i:hover {
+  color: #5f5d5c;
 }

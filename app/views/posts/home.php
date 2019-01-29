@@ -16,6 +16,7 @@
 flash('addpost-success');
 flash('delete-success');
 flash('editpost-success');
+flash('like');
 ?>
 
 <section id="posts" class="card-columns mt-3">

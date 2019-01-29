@@ -40,6 +40,13 @@ flash('comment_not_deleted');
         </strong>
     </p>
 
+    <!-- __Like__Button__ -->
+    <a href="<?php echo URLROOT; ?>/likes/like/<?php echo $data['post']->id; ?>" id="like-btn"
+        class="btn btn-link <?php echo $data['user_liked'] ? 'liked' : ''; ?>">
+        <i class="fa fa-thumbs-up"></i>
+        <span><?php echo $data['likes']; ?></span>
+    </a>
+
     <?php if ($data['post']->user_id == $_SESSION['user_id']): ?>
 
     <hr>
@@ -58,6 +65,7 @@ flash('comment_not_deleted');
 
 </section>
 
+<!-- ############################################### Comments ########################################## -->
 <section id="comments" class="bg-light p-4 mt-5">
     <!-- __title__ -->
     <div class="row">
@@ -86,10 +94,12 @@ flash('comment_not_deleted');
             <?php if ($comment->userId == $_SESSION['user_id']): ?>
             <!-- __delete__buttons__ -->
             <div class="media-footer">
-                <form action="<?php echo URLROOT; ?>/comments/delete/<?php echo $data['post']->id . '/' . $comment->id; ?>" method="post">
-            <input type="submit" class="btn btn-link text-danger" value="Delete">
-            
-            </form>
+                <form
+                    action="<?php echo URLROOT; ?>/comments/delete/<?php echo $data['post']->id . '/' . $comment->id; ?>"
+                    method="post">
+                    <input type="submit" class="btn btn-link text-danger" value="Delete">
+
+                </form>
             </div>
             <?php endif;?>
 

@@ -28,6 +28,13 @@ class Posts extends Controller
      */
     private $commentModel;
 
+    /**
+     * Like model
+     *
+     * @var object
+     */
+    private $likeModel;
+
     public function __construct()
     {
         if (!isLoggedIn()) {
@@ -37,6 +44,7 @@ class Posts extends Controller
         $this->postModel = $this->model('Post');
         $this->userModel = $this->model('User');
         $this->commentModel = $this->model('Comment');
+        $this->likeModel = $this->model('like');
 
     }
 
@@ -160,8 +168,9 @@ class Posts extends Controller
 
     public function show($id)
     {
-        if (empty($id)) {
+        if (empty($id) || !preg_match('~[0-9]+~', $id)) {
             redirect('posts');
+
         }
 
         $post = $this->postModel->fetchById($id);
@@ -178,9 +187,16 @@ class Posts extends Controller
         $data = [
             'post' => $post,
             'user' => $user,
+            'user_id' => $_SESSION['user_id'],
+            'post_id' => $id,
             'comments' => $comments,
             'comments_num' => $comments_num,
+            'likes' => '',
+            'user_liked' => '',
         ];
+
+        $data['likes'] = (int) $this->likeModel->countAll($id);
+        $data['user_liked'] = (int) $this->likeModel->check($data) > 0 ? true : false;
 
         $this->view('posts/show', $data);
     }
