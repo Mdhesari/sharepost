@@ -50,6 +50,8 @@ input[type=radio] {
   border-radius: 50%;
 }
 
+
+
 #dashboard_post .card .card-subtitle {
   font-weight: 400;
 }
@@ -103,12 +105,12 @@ textarea#comment_text {
   color: #5f5d5c;
 }
 
-#post-show #like-btn i{
-  transition:color 200ms;
+#post-show #like-btn i {
+  transition: color 200ms;
 }
 
 #post-show #like-btn i:hover {
-  transition:color 500ms;
+  transition: color 500ms;
   color: #4dabf7;
 }
 

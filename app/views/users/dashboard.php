@@ -4,14 +4,18 @@
     <div id="profile_container" class="col-md-3 col-12">
         <div class="card">
             <!-- __profile__picture__ -->
-            <img class="card-img-top ml-auto mr-auto mt-3" src="<?php echo URLROOT; ?>/assets/pictures/profile/default.jpg"
-                alt="Your Picture">
+            <img class="card-img-top ml-auto mr-auto mt-3"
+                src="<?php echo URLROOT; ?>/assets/pictures/profile/default.jpg" alt="Your Picture">
 
             <!-- __content__ -->
             <div class="card-body">
                 <!-- __title -->
                 <h5 class="card-title text-center">
                     <?php echo $_SESSION['user_fullname']; ?>
+                    <!-- Check user accessiblity -->
+                    <?php if (isAdminMaster()): ?>
+                    <i class="fa fa-star"></i>
+                    <?php endif;?>
                 </h5>
 
                 <!-- __subtitle__ -->
@@ -35,7 +39,8 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-6">
-                        <a class="text-link text-danger" href="#" id="logout-btn" onclick="if   (confirm('Are you sure?! \nYou want to logout!')){
+                        <a class="text-link text-danger" href="#" id="logout-btn"
+                            onclick="if   (confirm('Are you sure?! \nYou want to logout!')){
                         window.location = '<?php echo URLROOT; ?>/users/logout';
                         }">
                             <i class="fa fa-chevron-circle-right"></i> Logout
@@ -77,7 +82,7 @@ flash('editpost-success');
             </div>
             <?php else: ?>
             <div class="card-columns">
-            <?php foreach ($data['posts'] as $post): ?>
+                <?php foreach ($data['posts'] as $post): ?>
                 <article class="card">
                     <?php if (strlen($post->image) > 8): ?>
                     <img src="<?php echo URLROOT; ?>/assets/pictures/posts/<?php echo $post->user_id . '/' . $post->image ?>"

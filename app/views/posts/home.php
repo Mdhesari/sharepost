@@ -1,5 +1,4 @@
-<?php include_once APPROOT . '/views/inc/header.php';?>
-
+<?php include_once APPROOT . '/views/inc/header.php'; ?>
 <!-- title and axolury buttons -->
 <div class="row mb-3">
     <div class="col-md-6">

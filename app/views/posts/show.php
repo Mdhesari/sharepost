@@ -47,7 +47,7 @@ flash('comment_not_deleted');
         <span><?php echo $data['likes']; ?></span>
     </a>
 
-    <?php if ($data['post']->user_id == $_SESSION['user_id']): ?>
+    <?php if (checkBothAccess($data['post']->user_id)): ?>
 
     <hr>
 

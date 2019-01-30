@@ -39,6 +39,7 @@ function createUserSession($user)
     $_SESSION['user_email'] = $user->email;
     $_SESSION['user_gender'] = $user->gender;
     $_SESSION['user_fullname'] = $user->full_name;
+    $_SESSION['user_accessiblity'] = $user->accessiblity;
 
     // Redircet to home page
     redirect();
@@ -50,6 +51,41 @@ function logoutUser()
     session_destroy();
 
     redirect('users/login');
+}
+
+// Point accessiblities
+function isAdminMaster()
+{
+    if ($_SESSION['user_accessiblity'] == 'admin' || $_SESSION['user_accessiblity'] == 'master') {
+        return true;
+
+    }
+
+    return false;
+}
+
+function isMaster()
+{
+    if ($_SESSION['user_accessiblity'] == 'master') {
+        return true;
+
+    }
+
+    return false;
+
+}
+
+function checkBothAccess($user_id)
+{
+    if ($user_id == $_SESSION['user_id']) {
+        return true;
+
+    } else if (isAdminMaster()) {
+        return true;
+
+    }
+
+    return false;
 }
 
 // Check if session is still set
